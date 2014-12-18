@@ -4,7 +4,7 @@ A plugin that displays captions given a caption data in format similar to [sami]
 
 
 ## Demo and Documentation
-See [here]((http://www.sampingchuang.com/videojs-caption)
+See [here] (http://www.sampingchuang.com/videojs-caption)
 
 ## Features
 * Custom styling
