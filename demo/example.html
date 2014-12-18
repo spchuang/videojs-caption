@@ -1,0 +1,89 @@
+
+</script>
+</body>
+</html>
+<!doctype html>
+<html>
+<head>
+  <title>Video.js Caption Example</title>
+  <!--<link href="http://vjs.zencdn.net/4.0/video-js.css" rel="stylesheet">!-->
+  <link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
+  
+  <link href="../src/videojs.caption.css" rel="stylesheet">
+  <style>
+    p {
+      background-color: #eee;
+      border: thin solid #777;
+      padding: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+  <p>This is a demo of video-caption plugin for videojs</p>
+  <div id="inc_font">BIGGER</div>
+  <div id="dec_font">SMALLER</div>
+  <video id="test_video" controls preload="none" class="video-js vjs-default-skin" width="1024" height="680">
+   
+      <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm"> 
+      <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+    </video>
+
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<!--<script src="http://vjs.zencdn.net/4.0/video.js"></script>!-->
+<script src="http://vjs.zencdn.net/4.2/video.js"></script>
+<script src='../src/videojs.caption.js'></script>
+<script>
+// initialize video.js
+var video = videojs('test_video');
+
+var sami_data = {"records": "3", "total": "3", "rows": [
+   {"endTime": 2000, "startTime": 0, "position": "HB", "data": "<I>\u4eca\u30b7\u30fc\u30ba\u30f3\u306f\u2026</I>",  "alignment": "CH"},
+   {"endTime": 7000, "startTime": 0, "position": "VR", "data": "<I>\u4eca\u30b7\u30fc\u30ba\u30f3\u306f\u2026</I>",  "alignment": "CH"},
+   {"endTime": 3500, "startTime": 2500, "position": "HB", "data": "TEST", "alignment": "CH"}
+
+]};
+
+//load the marker plugin
+function loadVideo() {
+   video_wrapper = video.caption(
+       {
+           data: sami_data.rows, 
+           setting:{
+             onCaptionChange: function(num_c){
+               console.log("playing: " + num_c + " caption");
+   
+             },
+             captionType: 'pop-on'
+   
+           } 
+       });
+
+}
+
+//console.log(video_wrapper);
+//sami_data.rows[0].data = "THIS IS CHANGED";
+
+$(document).ready(function() {
+   loadVideo();
+  //sami_data.rows[5].data = "THIS IS CHANGED";
+
+  console.log(sami_data);
+  $("#inc_font").click(function(){
+    //video_wrapper.trigger("increaseCaptionFont");
+    //video_wrapper.trigger("loadNewCaption", sami_data2);
+    video_wrapper.trigger("getRowCursorID", function(id){
+      console.log(id);
+
+    });
+  });
+  $("#dec_font").click(function(){
+    video_wrapper.trigger("decreaseCaptionFont");
+  });
+  
+});
+
+</script>
+</html>
