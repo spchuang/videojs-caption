@@ -45,7 +45,7 @@ module.exports = function(grunt) {
          },
          dist: {
             src: 'src/*.js',
-            dest: 'dist/<%= pkg.name %>.js'
+            dest: 'dist/videojs.caption.js'
          }
       },
       uglify: {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
          },
          dist: {
             src: '<%= concat.dist.dest %>',
-            dest: 'dist/<%= pkg.name %>.min.js'
+            dest: 'dist/videojs.caption.min.js'
          }
       }
    });

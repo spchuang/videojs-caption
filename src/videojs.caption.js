@@ -1,7 +1,7 @@
 (function($,undefined) {
    var POPON = 'pop-on';
-   var ROLLON = 'roll-on';
-   var ROLLON_LENGTH = 3;
+   var ROLLUP = 'roll-up';
+   var ROLLUP_LENGTH = 3;
    
    // default setting
    var defaults = {
@@ -82,14 +82,15 @@
          noCaption = false;
          cursorID = searchCaption(0);
          
+         if (setting.captionType === ROLLUP) {
+            applyCaptionStyle(captionOverlays[0], {position: 'HB', alignment: 'C'});
+            captionOverlays[0].empty();
+         }
+         
          if (!noCaption) {
             updateCaptionText();
          } else {
             updateCaptionOverlay(0, true);
-         }
-         
-         if (setting.captionType === ROLLON) {
-            applyCaptionStyle(captionOverlays[0], {position: 'HB', alignment: 'C'});
          }
 
          //bind timeupdate handle
@@ -177,19 +178,19 @@
       function updateCaptionText() {
          if (setting.captionType == POPON) {
             updatePopOnCaptionText();
-         } else if (setting.captionType == ROLLON) {
-            updateRollOnCaptionText();
+         } else if (setting.captionType == ROLLUP) {
+            updateRollUpCaptionText();
          }
       }
 
-      //Roll-on style:
+      //Roll-up style:
       //Assumption: no overlapping captions (start time should never be the same)
-      function updateRollOnCaptionText(){
+      function updateRollUpCaptionText(){
          captionOverlays[0].css("visibility","visible");
          var cursor = captions[cursorID];
 
-         //if there are already enough rollons, we removed the first and push the next to the end
-         if (captionOverlays[0].find('.vjs-caption-overlay-text').length >= ROLLON_LENGTH) {
+         //if there are already enough rollups, we removed the first and push the next to the end
+         if (captionOverlays[0].find('.vjs-caption-overlay-text').length >= ROLLUP_LENGTH) {
             captionOverlays[0].find('.vjs-caption-overlay-text')[0].remove();
          }
          //create new overlay text overlay
@@ -255,7 +256,7 @@
          }
          // hide the captions that aren't displaying
          while (numDisplayCaption > numNewDisplayCaption) {
-            updateCaptionOverlay(numDisplayCaption - 1, false);
+            updateCaptionOverlay(numDisplayCaption - 1, true);
             numDisplayCaption--;
          }
          numDisplayCaption = numNewDisplayCaption;
@@ -311,10 +312,11 @@
             if(setting.captionSize < 0) setting.captionSize = 8;
             applyCaptionSize();
          },
-         changeToRollOn: function() {
-            setting.captionType = ROLLON;
+         changeToRollUp: function() {
+            setting.captionType = ROLLUP;
             // change caption to center horizontal bottom
             applyCaptionStyle(captionOverlays[0], {position: 'HB', alignment: 'C'});
+            captionOverlays[0].empty();
    
             // hide all caption other than the first one
             while (numDisplayCaption > 1) {
@@ -325,12 +327,12 @@
          },
          changeToPopOn: function() {
             setting.captionType = POPON;
-            // remove the extra caption overlays created in rollon mode
-            var rollonOverlaysLength = captionOverlays[0].find('.vjs-caption-overlay-text').length;
+            // remove the extra caption overlays created in rollup mode
+            var rollupOverlaysLength = captionOverlays[0].find('.vjs-caption-overlay-text').length;
    
-            while (rollonOverlaysLength > 1) {
+            while (rollupOverlaysLength > 1) {
                captionOverlays[0].find('.vjs-caption-overlay-text')[0].remove();
-               rollonOverlaysLength--;
+               rollupOverlaysLength--;
             }
          }
       }
