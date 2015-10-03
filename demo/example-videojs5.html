@@ -6,8 +6,7 @@
 <html>
 <head>
   <title>Video.js Caption Example</title>
-  <link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
-  
+  <link href="http://vjs.zencdn.net/5.0/video-js.css" rel="stylesheet">
   <link href="../dist/videojs.caption.css" rel="stylesheet">
   <style>
     p {
@@ -23,16 +22,22 @@
   <p>This is a demo of video-caption plugin for videojs</p>
   <div id="increase-font">BIGGER</div>
   <div id="decrease-font">SMALLER</div>
-  <video id="testVideo" controls preload="none" class="video-js vjs-default-skin" width="1024" height="680">
-   
-      <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm"> 
-      <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-    </video>
+
+  <video id="testVideo" class="video-js vjs-default-skin" controls
+    preload="auto" width="640" height="264" poster="really-cool-video-poster.jpg"
+    data-setup='{}'>
+    <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
+    <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web browser
+    that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
 
 </body>
+
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script src="http://vjs.zencdn.net/4.2/video.js"></script>
-<script src='../dist/videojs.caption.js'></script>
+<script src="http://vjs.zencdn.net/5.0/video.min.js"></script>
+<script src='../src/videojs.caption.js'></script>
 <script>
 
 

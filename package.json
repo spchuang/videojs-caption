@@ -3,7 +3,7 @@
   "description": "Flexiby display captions, especially for Asian characters.",
   "version": "0.4.0",
   "peerDependencies": {
-    "video-js": "4.0",
+    "video-js": "5.0",
     "jQuery": "2.0.3"
   },
   "devDependencies": {
